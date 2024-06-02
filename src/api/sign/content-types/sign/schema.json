@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "signs",
+  "info": {
+    "singularName": "sign",
+    "pluralName": "signs",
+    "displayName": "sign",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "video_name": {
+      "type": "string"
+    },
+    "first_validator": {
+      "type": "string"
+    },
+    "second_validator": {
+      "type": "string"
+    },
+    "third_validator": {
+      "type": "string"
+    },
+    "final_gloss": {
+      "type": "string"
+    },
+    "video_url": {
+      "type": "string"
+    }
+  }
+}
