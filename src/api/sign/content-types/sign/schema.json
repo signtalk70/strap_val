@@ -15,20 +15,33 @@
     "video_name": {
       "type": "string"
     },
-    "first_validator": {
-      "type": "string"
-    },
-    "second_validator": {
-      "type": "string"
-    },
-    "third_validator": {
-      "type": "string"
-    },
     "final_gloss": {
       "type": "string"
     },
     "video_url": {
       "type": "string"
+    },
+    "users_voted": {
+      "type": "json",
+      "default": []
+    },
+    "correctness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "wrongness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "total_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "createdAt": {
+      "type": "datetime"
+    },
+    "updatedAt": {
+      "type": "datetime"
     }
   }
 }
