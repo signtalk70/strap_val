@@ -810,6 +810,10 @@ export interface ApiCustomUserCustomUser extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         minLength: 3;
       }>;
+    total_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    correctness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    wrongness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    emailVerified: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::custom-user.custom-user',

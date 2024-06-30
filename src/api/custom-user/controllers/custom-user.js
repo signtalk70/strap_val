@@ -44,10 +44,14 @@ module.exports = createCoreController('api::custom-user.custom-user',({strapi})=
           jwt,
           user: {
             id: user.id,
-            username: user.email,
+            username: user.username,
             firstname: user.firstname,
             lastname: user.lastname,
-            // Add other user fields you want to return
+            emailVerified: user.emailVerified,
+            total_votes: user.total_votes,
+            correctness: user.correctness_votes,
+            wrongness: user.wrongness_votes,
+            
           },
         });
      },

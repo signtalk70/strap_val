@@ -33,6 +33,22 @@
       "type": "password",
       "required": true,
       "minLength": 3
+    },
+    "total_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "correctness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "wrongness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "emailVerified": {
+      "type": "datetime",
+      "required": false
     }
   }
 }
