@@ -843,6 +843,7 @@ export interface ApiSignSign extends Schema.CollectionType {
   };
   attributes: {
     video_name: Attribute.String;
+    description: Attribute.String & Attribute.DefaultTo<''>;
     final_gloss: Attribute.String;
     video_url: Attribute.String;
     users_voted: Attribute.JSON & Attribute.DefaultTo<[]>;

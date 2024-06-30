@@ -10,7 +10,7 @@ module.exports = {
           } ,
           {
             method: 'POST',
-            path: '/custom-user/create',
+            path: '/custom-user/register',
             handler: 'custom-user.register', //
             config: {
               auth: false,
