@@ -362,70 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiSignSign extends Schema.CollectionType {
-  collectionName: 'signs';
-  info: {
-    singularName: 'sign';
-    pluralName: 'signs';
-    displayName: 'sign';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    video_name: Attribute.String;
-    first_validator: Attribute.String;
-    second_validator: Attribute.String;
-    third_validator: Attribute.String;
-    final_gloss: Attribute.String;
-    video_url: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::sign.sign', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::sign.sign', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
-export interface ApiVideoFileVideoFile extends Schema.CollectionType {
-  collectionName: 'video_files';
-  info: {
-    singularName: 'video-file';
-    pluralName: 'video-files';
-    displayName: 'video_file';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    video_name: Attribute.String;
-    video_file: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    first_validator: Attribute.String;
-    second_validator: Attribute.String;
-    third_validator: Attribute.String;
-    final_gloss: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::video-file.video-file',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::video-file.video-file',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -654,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -805,46 +788,107 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiCustomUserCustomUser extends Schema.CollectionType {
+  collectionName: 'custom_users';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
+    singularName: 'custom-user';
+    pluralName: 'custom-users';
+    displayName: 'Custom_user';
     description: '';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    username: Attribute.Email & Attribute.Required & Attribute.Unique;
+    firstname: Attribute.String;
+    lastname: Attribute.String;
+    password: Attribute.Password &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
+    total_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    correctness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    wrongness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    emailVerified: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::custom-user.custom-user',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::custom-user.custom-user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSignSign extends Schema.CollectionType {
+  collectionName: 'signs';
+  info: {
+    singularName: 'sign';
+    pluralName: 'signs';
+    displayName: 'sign';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    video_name: Attribute.String;
+    description: Attribute.String & Attribute.DefaultTo<''>;
+    final_gloss: Attribute.String;
+    video_url: Attribute.String;
+    users_voted: Attribute.JSON & Attribute.DefaultTo<[]>;
+    correctness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    wrongness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    total_votes: Attribute.Integer & Attribute.DefaultTo<0>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::sign.sign', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::sign.sign', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVideoFileVideoFile extends Schema.CollectionType {
+  collectionName: 'video_files';
+  info: {
+    singularName: 'video-file';
+    pluralName: 'video-files';
+    displayName: 'video_file';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    video_name: Attribute.String;
+    video_file: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    first_validator: Attribute.String;
+    second_validator: Attribute.String;
+    third_validator: Attribute.String;
+    final_gloss: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::video-file.video-file',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::video-file.video-file',
       'oneToOne',
       'admin::user'
     > &
@@ -862,16 +906,17 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::sign.sign': ApiSignSign;
-      'api::video-file.video-file': ApiVideoFileVideoFile;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::custom-user.custom-user': ApiCustomUserCustomUser;
+      'api::sign.sign': ApiSignSign;
+      'api::video-file.video-file': ApiVideoFileVideoFile;
     }
   }
 }

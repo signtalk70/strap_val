@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "custom_users",
+  "info": {
+    "singularName": "custom-user",
+    "pluralName": "custom-users",
+    "displayName": "Custom_user",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "createdAt": {
+      "type": "datetime"
+    },
+    "updatedAt": {
+      "type": "datetime"
+    },
+    "username": {
+      "type": "email",
+      "unique": true,
+      "required": true
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "password": {
+      "type": "password",
+      "required": true,
+      "minLength": 3
+    },
+    "total_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "correctness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "wrongness_votes": {
+      "type": "integer",
+      "default": 0
+    },
+    "emailVerified": {
+      "type": "datetime",
+      "required": false
+    }
+  }
+}
