@@ -12,12 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "createdAt": {
+      "type": "datetime"
+    },
+    "updatedAt": {
+      "type": "datetime"
+    },
     "video_name": {
       "type": "string"
     },
     "description": {
-      "type": "string",
-      "default": ""
+      "type": "string"
     },
     "final_gloss": {
       "type": "string"
@@ -41,11 +46,15 @@
       "type": "integer",
       "default": 0
     },
-    "createdAt": {
-      "type": "datetime"
-    },
-    "updatedAt": {
-      "type": "datetime"
+    "video": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

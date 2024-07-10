@@ -842,16 +842,17 @@ export interface ApiSignSign extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
     video_name: Attribute.String;
-    description: Attribute.String & Attribute.DefaultTo<''>;
+    description: Attribute.String;
     final_gloss: Attribute.String;
     video_url: Attribute.String;
     users_voted: Attribute.JSON & Attribute.DefaultTo<[]>;
     correctness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
     wrongness_votes: Attribute.Integer & Attribute.DefaultTo<0>;
     total_votes: Attribute.Integer & Attribute.DefaultTo<0>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
+    video: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::sign.sign', 'oneToOne', 'admin::user'> &
       Attribute.Private;
