@@ -1,14 +1,1 @@
-runtime: nodejs18
 
-instance_class: F2
-
-env_variables:
-  HOST: '0.0.0.0'
-  NODE_ENV: 'production'
-  DATABASE_NAME: 'signtalk1'
-  DATABASE_USERNAME: 'signtalk1'
-  DATABASE_PASSWORD: 'signtalk1'
-  INSTANCE_CONNECTION_NAME: 'signtalk-428623:us-central1:signtalk1'
-
-beta_settings:
-  cloud_sql_instances: 'signtalk-428623:us-central1:signtalk1'
